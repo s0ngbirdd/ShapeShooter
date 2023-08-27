@@ -2,19 +2,19 @@
 	"hexColors":
 	[
 		{
-			"hex": "B02E48"
+			"hex": "00FF00"
 		},
 		{
-			"hex": "81FB94"
+			"hex": "0000FF"
 		},
 		{
-			"hex": "477BA4"
+			"hex": "FFFD00"
 		},
 		{
-			"hex": "00FFF7"
+			"hex": "FF00FF"
 		},
 		{
-			"hex": "FFFFFF"
+			"hex": "00FFFF"
 		}
 	]
 }
