@@ -9,7 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7124499264451960441}
+  - component: {fileID: -648435378184618165}
   - component: {fileID: 7124499264451960440}
+  - component: {fileID: -7939318568706190565}
   m_Layer: 0
   m_Name: ShapeCreator
   m_TagString: Untagged
@@ -32,6 +34,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &-648435378184618165
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7124499264451960439}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!114 &7124499264451960440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49,4 +67,15 @@ MonoBehaviour:
   - {fileID: 5942677326434269247, guid: 684bca579f7cf334882e6ab193f72543, type: 3}
   _dimensionLength: 5
   _objectToLookAt: {fileID: 6395733282556054597, guid: d94fb051cfbdb43498e5304a5c20df88, type: 3}
-  _jsonReader: {fileID: 1028223924334006628, guid: 5213b945263e5c544a4d757b833e47bb, type: 3}
+--- !u!114 &-7939318568706190565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7124499264451960439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8f781f140c7c94a853153d7b44741b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

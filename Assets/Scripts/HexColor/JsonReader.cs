@@ -7,8 +7,6 @@ public class JsonReader : MonoBehaviour
 
     private List<string> _hexColorStrings;
 
-    public List<string> HexColorStrings => _hexColorStrings;
-
     private void Start()
     {
         _hexColorStrings = new List<string>();
@@ -19,5 +17,10 @@ public class JsonReader : MonoBehaviour
         {
             _hexColorStrings.Add(hexColor.hex);
         }
+    }
+
+    public Color GetRandomColor()
+    {
+        return HexadecimalStringToColorСonverter.GetColorFromString(_hexColorStrings[Random.Range(0, _hexColorStrings.Count)]);
     }
 }

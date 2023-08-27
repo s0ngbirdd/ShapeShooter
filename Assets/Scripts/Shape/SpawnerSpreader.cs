@@ -1,24 +1,37 @@
+using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class SpawnerSpreader : MonoBehaviour
 {
-    [SerializeField] private GameObject _objectToSpawn;
+    public static event Action<Vector3> OnSetSpawnPoint;
+    
+    //[SerializeField] private GameObject _objectToSpawn;
     [SerializeField] private float _objectXSpread = 10;
     [SerializeField] private float _objectYSpread = 0;
     [SerializeField] private float _objectZSpread = 10;
     [SerializeField] private int _objectToSpreadNumber = 1;
     
-    [SerializeField] private float _objectToSpawnYOffset = 0.5f;
+    //[SerializeField] private float _objectToSpawnYOffset = 0.5f;
     [SerializeField] private float _raycastDistance = 100;
     [SerializeField] private float _overlapBoxSize = 0.5f;
     [SerializeField] private LayerMask _spawnedObjectLayer;
+
+    private void OnEnable()
+    {
+        CollisionController.OnCollisionDetection += WaitToSpreadObject;
+    }
+
+    private void OnDisable()
+    {
+        CollisionController.OnCollisionDetection -= WaitToSpreadObject;
+    }
 
     private void Start()
     {
         for (int i = 0; i < _objectToSpreadNumber; i++)
         {
-            SpreadObject();
+            Invoke(nameof(SpreadObject), 1);
         }
     }
 
@@ -30,10 +43,6 @@ public class SpawnerSpreader : MonoBehaviour
     private void SpreadObject()
     {
         Vector3 randomPosition = new Vector3(Random.Range(-_objectXSpread, _objectXSpread), Random.Range(-_objectYSpread, _objectYSpread), Random.Range(-_objectZSpread, _objectZSpread)) + transform.position;
-
-        Debug.Log("1");
-        GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        obj.transform.position = randomPosition;
         
         ObjectOverlappingCheck(randomPosition);
     }
@@ -49,12 +58,10 @@ public class SpawnerSpreader : MonoBehaviour
 
             if (numberOfCollidersFound == 0)
             {
-                Debug.Log("2");
                 SpawnObject(hit.point, spawnRotation);
             }
             else
             {
-                Debug.Log("RE");
                 SpreadObject();
             }
         }
@@ -62,6 +69,12 @@ public class SpawnerSpreader : MonoBehaviour
 
     private void SpawnObject(Vector3 positionToSpawn, Quaternion rotationToSpawn)
     {
-        GameObject obj = Instantiate(_objectToSpawn, positionToSpawn + new Vector3(0, _objectToSpawnYOffset, 0), rotationToSpawn);
+        OnSetSpawnPoint?.Invoke(positionToSpawn);
+        //GameObject obj = Instantiate(_objectToSpawn, positionToSpawn + new Vector3(0, _objectToSpawnYOffset, 0), rotationToSpawn);
+    }
+
+    private void WaitToSpreadObject()
+    {
+        Invoke(nameof(SpreadObject), 3);
     }
 }
